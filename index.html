@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Prueba Firebase</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div id="loader" class="fixed inset-0 flex flex-col items-center justify-center bg-black z-50">
+
+    <img
+        src="assets/logo.jpg"
+        alt="Logo"
+        class="w-40 h-40 rounded-full object-cover animate-pulse shadow-lg">
+
+    <h2 class="mt-4 text-white text-2xl font-bold">
+        Bienvenido al Gran Galeón
+    </h2>
+
+</div>
+<div id="contenido">
+    <!-- Barra superior -->
+    <div
+    id="topBar"
+    class="hidden md:flex bg-yellow-500 text-black h-10 items-center justify-between transition-all duration-300">
+
+        <div class="max-w-7xl w-1/2 px-4 flex justify-between">
+
+            <span>
+                <i class="fa-solid fa-location-dot"></i>
+                Av. franco valle entre calles 2 y 3 de la zona 12 de octubre
+            </span>
+
+            <span class="border-l-2 border-white pl-4">
+                <i class="fa-solid fa-phone"></i>
+                77753553
+            </span>
+
+        </div>
+        <div class=" w-1/5 px-4 flex justify-between">
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-tiktok"></i>
+            <i class="fa-brands fa-instagram"></i>
+        </div>
+
+    </div>
+    <!-- Aquí va toda tu página -->
+    <nav id="navbar" class="bg-black text-white fixed md:top-10 top-0 w-full z-40">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="flex justify-between items-center h-24">
+
+ <img
+        src="assets/logonav2.png"
+        alt="Logo"
+        class="w-30 h-24 animate-pulse shadow-lg">
+
+            <!-- Menú PC -->
+            <div class="hidden md:flex space-x-6">
+
+                <a href="#inicio">Inicio</a>
+                <a href="#cartelera">Cartelera</a>
+                <a href="#transmisiones">Transmisiones</a>
+                <a href="#galeria">Galería</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#contacto">Contacto</a>
+
+            </div>
+
+            <!-- Botón hamburguesa -->
+            <button
+                id="menuBtn"
+                class="md:hidden text-3xl">
+
+                ☰
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Menú móvil -->
+
+    <div
+        id="mobileMenu"
+        class="hidden md:hidden bg-gray-900">
+
+        <a href="#inicio" class="movil block p-4">Inicio</a>
+        <a href="#cartelera" class="movil block p-4">Cartelera</a>
+        <a href="#transmisiones" class="movil block p-4">Transmisiones</a>
+        <a href="#galeria" class="movil block p-4">Galería</a>
+        <a href="#nosotros" class="movil block p-4">Nosotros</a>
+        <a href="#contacto" class="movil block p-4">Contacto</a>
+
+    </div>
+
+</nav>
+<section id="inicio" class="min-h-screen pt-20">
+
+    <div id="banner" class="relative w-full overflow-hidden rounded-lg">
+    </div>
+    <div
+        id="indicadores"
+        class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+    </div>
+
+</section>
+
+<section id="cartelera" class="min-h-screen py-10">
+
+    <h2 class="text-4xl font-bold text-center mb-8">
+        Cartelera de la Semana
+    </h2>
+
+    <div
+        id="carteleraContainer"
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+    </div>
+
+</section>
+
+<section id="transmisiones" class="min-h-screen py-10 bg-gray-100">
+
+    <h2 class="text-4xl font-bold text-center mb-8">
+        Transmisiones
+    </h2>
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="grid lg:grid-cols-3 gap-6">
+
+            <!-- Pantalla principal -->
+            <div class="lg:col-span-2">
+
+                <div class="bg-white rounded-2xl shadow-xl p-4">
+
+                    <div class="fb-page"
+                        data-href="https://www.facebook.com/elnuevogaleon"
+                        data-tabs="timeline"
+                        data-width="500"
+                        data-height="700"
+                        data-adapt-container-width="true">
+                    </div>
+
+                    </div>
+
+            </div>
+
+            <!-- Videos laterales -->
+            <div
+                id="videosContainer"
+                class="space-y-4">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="galeria" class="py-16 bg-gray-100">
+
+    <h2 class="text-4xl font-bold text-center mb-10">
+        Galería
+    </h2>
+
+    <div
+        id="galeriaContainer"
+        class="columns-2 md:columns-3 lg:columns-4 gap-4 px-4 max-w-7xl mx-auto">
+    </div>
+   <div
+    id="modal"
+    class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+
+    <button
+        id="cerrarModal"
+        class="absolute top-5 right-5 text-white text-4xl z-50">
+        ✕
+    </button>
+
+    <img
+        id="modalImg"
+        class="max-w-[95%] max-h-[90%] rounded-xl shadow-2xl">
+
+</div>
+
+</section>
+
+<section id="nosotros" class="py-20 bg-gray-100">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="grid lg:grid-cols-2 gap-10 items-center">
+
+            <!-- Información -->
+            <div>
+
+                <h2 class="text-4xl font-bold mb-6">
+                    Sobre Nosotros
+                </h2>
+
+                <p class="text-gray-700 text-lg mb-6">
+                    Gran Galeón es uno de los mejores espacios para disfrutar de música en vivo, eventos especiales y una experiencia segura para todos nuestros visitantes.
+                </p>
+
+                <div class="space-y-4">
+
+                    <div>✅ Seguridad dentro y fuera del local</div>
+
+                    <div>✅ Personal capacitado</div>
+
+                    <div>✅ DJs profesionales</div>
+
+                    <div>✅ Ambiente cómodo y seguro</div>
+
+                    <div>✅ Eventos musicales cada semana</div>
+
+                    <div>✅ Atención de calidad</div>
+
+                    <div>✅ Sonido e iluminación profesional</div>
+
+                </div>
+
+            </div>
+
+            <!-- Carrusel -->
+            <div>
+
+                <img
+                    id="imagenNosotros"
+                    src="assets/disco1.jpg"
+                    class="w-full h-[450px] object-cover rounded-2xl shadow-2xl">
+
+            </div>
+
+        </div>
+
+        <!-- Equipo -->
+        <div class="mt-20">
+
+            <h3 class="text-3xl font-bold text-center mb-10">
+                Nuestro Equipo
+            </h3>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+
+                    <i class="fa-solid fa-headphones text-5xl mb-4"></i>
+
+                    <h4 class="text-xl font-bold">
+                        DJ Principal
+                    </h4>
+
+                    <p>
+                        Música en vivo y animación.
+                    </p>
+
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+
+                    <i class="fa-solid fa-shield-halved text-5xl mb-4"></i>
+
+                    <h4 class="text-xl font-bold">
+                        Seguridad
+                    </h4>
+
+                    <p>
+                        Protección dentro y fuera del local.
+                    </p>
+
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+
+                    <i class="fa-solid fa-user-tie text-5xl mb-4"></i>
+
+                    <h4 class="text-xl font-bold">
+                        Atención al Cliente
+                    </h4>
+
+                    <p>
+                        Siempre listos para ayudarte.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contacto" class="py-20 bg-gray-100">
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <h2 class="text-4xl font-bold text-center mb-12">
+            Contáctanos
+        </h2>
+
+        <div class="grid lg:grid-cols-2 gap-10">
+
+            <!-- Formulario -->
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+
+                <h3 class="text-2xl font-bold mb-6">
+                    Escríbenos
+                </h3>
+
+                <form id="formContacto" class="space-y-4">
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Nombre"
+                        class="w-full border rounded-lg p-3">
+
+                    <input
+                        type="tel"
+                        id="telefono"
+                        placeholder="Teléfono"
+                        class="w-full border rounded-lg p-3">
+
+                    <textarea
+                        id="mensaje"
+                        rows="5"
+                        placeholder="Mensaje"
+                        class="w-full border rounded-lg p-3"></textarea>
+
+                    <button
+                        type="button"
+                        id="btnWhatsapp"
+                        class="w-full bg-green-600 text-white p-3 rounded-lg">
+
+                        <i class="fa-brands fa-whatsapp"></i>
+                        Enviar por WhatsApp
+
+                    </button>
+
+                    <button
+                        type="button"
+                        id="btnCorreo"
+                        class="w-full bg-blue-600 text-white p-3 rounded-lg">
+
+                        <i class="fa-solid fa-envelope"></i>
+                        Enviar por Correo
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- Ubicación -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+
+                <div class="p-6">
+
+                    <h3 class="text-2xl font-bold mb-4">
+                        Nuestra Ubicación
+                    </h3>
+
+                    <p class="text-gray-600 mb-4">
+                        Av. Franco Valle entre calles 2 y 3, Zona 12 de Octubre.
+                    </p>
+
+                </div>
+
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.3797962569915!2d-68.1652962766408!3d-16.506912890899784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915edf798b2526b1%3A0xcfdb378d2cea50c0!2sDiscoteca%20El%20Gran%20Galeon!5e0!3m2!1ses!2sbo!4v1780173204368!5m2!1ses!2sbo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script type="module" src="app.js"></script>
+
+</body>
+
+</html>
