@@ -60,12 +60,31 @@ async function cargarBanner() {
             const evento = eventos[indice];
 
             banner.innerHTML = `
-                <img src="${evento.imagen}" class="absolute inset-0 w-full h-full scale-110 blur-md opacity-100">
-                <div class="absolute inset-0 bg-black/30"></div>
-                <div class="relative h-full flex flex-col justify-center items-center p-4">
-                    <img src="${evento.imagen}" class="w-52 md:w-96 rounded-xl shadow-2xl">
-                </div>
-            `;
+    <!-- Fondo -->
+    <img
+        src="${evento.imagen}"
+        class="absolute inset-0 w-full h-full object-cover scale-110 blur-md">
+
+    <!-- Capa oscura -->
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <!-- Contenido -->
+    <div class="relative h-full flex flex-col justify-center items-center p-4">
+
+        <img
+            src="${evento.imagen}"
+            class="w-[90%] max-w-md rounded-xl shadow-2xl">
+
+        <h2 class="text-white text-3xl md:text-5xl font-bold mt-4 text-center">
+            ${evento.titulo}
+        </h2>
+
+        <p class="text-white text-lg md:text-2xl mt-2 text-center">
+            ${evento.fecha}
+        </p>
+
+    </div>
+`;
 
             document.querySelectorAll(".dot").forEach((dot, i) => {
                 dot.classList.toggle("bg-white", i === indice);
