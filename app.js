@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
     });
 
-    
+ });   
 async function cargarVideos() {
 
     const contenedor =
