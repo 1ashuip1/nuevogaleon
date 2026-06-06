@@ -60,31 +60,29 @@ async function cargarBanner() {
 
     const evento = eventos[indice];
 
+    const imagenBanner =
+        window.innerWidth < 768
+            ? evento.bannerMovil
+            : evento.bannerPc;
+
     banner.innerHTML = `
-    
-        <img
-            src="${evento.imagen}"
-            class="absolute inset-0 w-full h-full object-cover">
 
-        <div class="absolute inset-0 bg-black/20"></div>
+    <!-- Fondo -->
+    <img
+        src="${imagenBanner}"
+        class="absolute inset-0 w-full h-full object-cover blur-md scale-110">
 
-    `;
+    <div class="absolute inset-0 bg-black/40"></div>
 
-    document.querySelectorAll(".dot").forEach((dot, i) => {
+    <!-- Imagen completa -->
+    <img
+        src="${imagenBanner}"
+        class="relative z-10 w-full h-full object-contain">
 
-        dot.classList.remove("bg-white");
-        dot.classList.add("bg-white/40");
+`;
 
-        if (i === indice) {
-
-            dot.classList.remove("bg-white/40");
-            dot.classList.add("bg-white");
-
-        }
-
-    });
-
-} 
+    actualizarDots();
+}
         // Touch swipe
         banner.addEventListener("touchstart", e => startX = e.touches[0].clientX);
         banner.addEventListener("touchend", e => {
