@@ -43,7 +43,39 @@ function ocultarLoader() {
         loader.style.display = "none";
     }, 600);
 }
+function actualizarDots() {
 
+    document
+        .querySelectorAll(".dot")
+        .forEach((dot, i) => {
+
+            if (i === indice) {
+
+                dot.classList.remove(
+                    "bg-white/40"
+                );
+
+                dot.classList.add(
+                    "bg-white",
+                    "scale-125"
+                );
+
+            } else {
+
+                dot.classList.remove(
+                    "bg-white",
+                    "scale-125"
+                );
+
+                dot.classList.add(
+                    "bg-white/40"
+                );
+
+            }
+
+        });
+
+}
 // ==================== BANNER ====================
 async function cargarBanner() {
     try {
@@ -97,10 +129,10 @@ async function cargarBanner() {
 
         // Dots
         indicadores.innerHTML = eventos.map((_, i) => `
-    <button
-        class="dot w-4 h-4 rounded-full bg-white/40 border border-white"
-        data-index="${i}">
-    </button>
+<button
+    class="dot w-4 h-4 rounded-full bg-white/40 border border-white transition-all duration-300"
+    data-index="${i}">
+</button>
 `).join("");
 document
 .getElementById("prevBanner")
