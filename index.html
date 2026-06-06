@@ -52,19 +52,24 @@
 
     </div>
     <!-- Aquí va toda tu página -->
-    <nav id="navbar" class="bg-black/0 text-white fixed md:top-10 top-0 w-full z-40 transition-all duration-300">
+    <nav
+    id="navbar"
+    class="bg-black md:bg-transparent text-white fixed md:top-10 top-0 w-full z-40 transition-all duration-300">
 
     <div class="max-w-7xl mx-auto px-4">
 
-        <div class="flex justify-between items-center h-24">
+        <div
+            id="navbarContent"
+            class="flex justify-between items-center h-16 md:h-24">
 
- <img
-        src="assets/logonav2.png"
-        alt="Logo"
-        class="w-30 h-24 animate-pulse shadow-lg">
+            <img
+                src="assets/logonav2.png"
+                alt="Logo"
+                id="logoNav"
+                class="w-20 h-16 md:w-32 md:h-24 transition-all duration-300">
 
             <!-- Menú PC -->
-            <div class="hidden md:flex space-x-6">
+            <div class="hidden md:flex space-x-8 text-lg">
 
                 <a href="#inicio">Inicio</a>
                 <a href="#cartelera">Cartelera</a>
@@ -91,17 +96,34 @@
     <!-- Menú móvil -->
 
     <div
-        id="mobileMenu"
-        class="hidden md:hidden bg-gray-900 w-full absolute left-0 top-full">
+    id="mobileMenu"
+    class="hidden md:hidden absolute right-4 top-full w-64 bg-black rounded-xl shadow-2xl overflow-hidden">
 
-        <a href="#inicio" class="movil block p-4">Inicio</a>
-        <a href="#cartelera" class="movil block p-4">Cartelera</a>
-        <a href="#transmisiones" class="movil block p-4">Transmisiones</a>
-        <a href="#galeria" class="movil block p-4">Galería</a>
-        <a href="#nosotros" class="movil block p-4">Nosotros</a>
-        <a href="#contacto" class="movil block p-4">Contacto</a>
+    <a href="#inicio" class="movil block p-4 border-b border-gray-700">
+        Inicio
+    </a>
 
-    </div>
+    <a href="#cartelera" class="movil block p-4 border-b border-gray-700">
+        Cartelera
+    </a>
+
+    <a href="#transmisiones" class="movil block p-4 border-b border-gray-700">
+        Transmisiones
+    </a>
+
+    <a href="#galeria" class="movil block p-4 border-b border-gray-700">
+        Galería
+    </a>
+
+    <a href="#nosotros" class="movil block p-4 border-b border-gray-700">
+        Nosotros
+    </a>
+
+    <a href="#contacto" class="movil block p-4">
+        Contacto
+    </a>
+
+</div>
 
 </nav>
 <section id="inicio" class="min-h-screen pt-20">
