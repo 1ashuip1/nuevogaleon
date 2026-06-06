@@ -210,17 +210,27 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Scroll topbar
     const topBar = document.getElementById("topBar");
-    const navbar = document.getElementById("navbar");
+const navbar = document.getElementById("navbar");
 
-    window.addEventListener("scroll", () => {
+window.addEventListener("scroll", () => {
+
+    // Solo para PC
+    if (window.innerWidth >= 768) {
+
         if (window.scrollY > 20) {
+
             topBar.style.transform = "translateY(-100%)";
             navbar.style.top = "0";
+
         } else {
+
             topBar.style.transform = "translateY(0)";
-            navbar.style.top = "10px"; // o "10" según tu diseño
+            navbar.style.top = "28px"; // altura real del topBar
+
         }
-    });
+
+    }
+
 });
 async function cargarVideos() {
 
