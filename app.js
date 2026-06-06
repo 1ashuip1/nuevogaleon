@@ -400,3 +400,35 @@ document
 `mailto:${correo}?subject=Consulta desde la web&body=Nombre: ${nombre}%0ATeléfono: ${telefono}%0A%0A${mensaje}`;
 
 });
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+    // Solo escritorio
+    if (window.innerWidth >= 768) {
+
+        if (window.scrollY > 50) {
+
+            navbar.classList.remove(
+                "md:bg-transparent"
+            );
+
+            navbar.classList.add(
+                "bg-black"
+            );
+
+        } else {
+
+            navbar.classList.remove(
+                "bg-black"
+            );
+
+            navbar.classList.add(
+                "md:bg-transparent"
+            );
+
+        }
+
+    }
+
+});
