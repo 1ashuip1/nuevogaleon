@@ -128,13 +128,34 @@
 </div>
 
 </nav>
-<section id="inicio" class="min-h-screen">
+<section id="inicio" class="min-h-screen relative">
 
-    <div id="banner" class="relative w-full h-[70vh] md:h-[85vh] overflow-hidden rounded-lg">
+    <div id="banner"
+        class="relative w-full h-[70vh] md:h-[85vh] overflow-hidden">
     </div>
+
+    <!-- Flecha izquierda -->
+    <button
+        id="prevBanner"
+        class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 text-white w-12 h-12 rounded-full">
+
+        ❮
+
+    </button>
+
+    <!-- Flecha derecha -->
+    <button
+        id="nextBanner"
+        class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 text-white w-12 h-12 rounded-full">
+
+        ❯
+
+    </button>
+
+    <!-- Indicadores -->
     <div
         id="indicadores"
-        class="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-30">
     </div>
 
 </section>
