@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             navbar.style.top = "0";
         } else {
             topBar.style.transform = "translateY(0)";
-            navbar.style.top = "40px"; // o "10" según tu diseño
+            navbar.style.top = "10px"; // o "10" según tu diseño
         }
     });
 });
