@@ -404,13 +404,13 @@ const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
 
-    // Solo escritorio
     if (window.innerWidth >= 768) {
 
         if (window.scrollY > 50) {
 
             navbar.classList.remove(
-                "md:bg-transparent"
+                "bg-black/20",
+                "backdrop-blur-sm"
             );
 
             navbar.classList.add(
@@ -424,7 +424,8 @@ window.addEventListener("scroll", () => {
             );
 
             navbar.classList.add(
-                "md:bg-transparent"
+                "bg-black/20",
+                "backdrop-blur-sm"
             );
 
         }
