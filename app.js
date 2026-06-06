@@ -387,14 +387,23 @@ document
 `mailto:${correo}?subject=Consulta desde la web&body=Nombre: ${nombre}%0ATeléfono: ${telefono}%0A%0A${mensaje}`;
 
 });
+const topBar = document.getElementById("topBar");
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
 
+    // SOLO EN PC
     if (window.innerWidth >= 768) {
 
-        if (window.scrollY > 50) {
+        if (window.scrollY > 20) {
 
+            // Ocultar barra superior
+            topBar.style.transform = "translateY(-100%)";
+
+            // Subir navbar
+            navbar.style.top = "0";
+
+            // Fondo sólido
             navbar.classList.remove(
                 "bg-black/20",
                 "backdrop-blur-sm"
@@ -406,6 +415,13 @@ window.addEventListener("scroll", () => {
 
         } else {
 
+            // Mostrar barra superior
+            topBar.style.transform = "translateY(0)";
+
+            // Dejar espacio para topBar
+            navbar.style.top = "28px";
+
+            // Transparente con blur
             navbar.classList.remove(
                 "bg-black"
             );
@@ -416,6 +432,21 @@ window.addEventListener("scroll", () => {
             );
 
         }
+
+    } else {
+
+        // MÓVIL
+        topBar.style.transform = "translateY(0)";
+        navbar.style.top = "0";
+
+        navbar.classList.remove(
+            "bg-black/20",
+            "backdrop-blur-sm"
+        );
+
+        navbar.classList.add(
+            "bg-black"
+        );
 
     }
 
