@@ -215,15 +215,36 @@ async function cargarCartelera() {
 
             if (fechaEvento >= inicioSemana && fechaEvento <= finSemana) {
                 html += `
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg">
-                        <img src="${evento.imagen}" class="w-full h-60 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-2xl font-bold">${evento.titulo}</h3>
-                            <p class="text-gray-500 mt-2">${fechaEspanol(evento.fecha)}</p>
-                            <p class="mt-3 text-gray-700">${evento.descripcion || ""}</p>
-                        </div>
-                    </div>
-                `;
+<div class="backdrop-blur-md bg-black/60 border border-purple-500/30
+            rounded-2xl overflow-hidden shadow-2xl
+            hover:scale-105 transition duration-300">
+
+    <img
+        src="${evento.bannerMovil || evento.imagen}"
+        class="w-full h-96 object-cover">
+
+    <div class="p-5 text-center">
+
+        <p class="text-pink-400 uppercase text-sm tracking-widest">
+            Próximo Evento
+        </p>
+
+        <h3 class="text-white text-3xl font-extrabold mt-2">
+            ${evento.titulo}
+        </h3>
+
+        <p class="text-yellow-400 mt-3 text-lg">
+            📅 ${fechaEspanol(evento.fecha)}
+        </p>
+
+        <p class="text-gray-300 mt-4">
+            ${evento.descripcion || ""}
+        </p>
+
+    </div>
+
+</div>
+`;
             }
         });
 
