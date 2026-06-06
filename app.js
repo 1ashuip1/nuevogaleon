@@ -57,41 +57,34 @@ async function cargarBanner() {
         if (eventos.length === 0) return;
 
         function mostrarEvento() {
-            const evento = eventos[indice];
 
-            banner.innerHTML = `
-    <!-- Fondo -->
-    <img
-        src="${evento.imagen}"
-        class="absolute inset-0 w-full h-full object-cover scale-110 blur-md">
+    const evento = eventos[indice];
 
-    <!-- Capa oscura -->
-    <div class="absolute inset-0 bg-black/40"></div>
-
-    <!-- Contenido -->
-    <div class="relative h-full flex flex-col justify-center items-center p-4">
-
+    banner.innerHTML = `
+    
         <img
             src="${evento.imagen}"
-            class="w-[90%] max-w-md rounded-xl shadow-2xl">
+            class="absolute inset-0 w-full h-full object-cover">
 
-        <h2 class="text-white text-3xl md:text-5xl font-bold mt-4 text-center">
-            ${evento.titulo}
-        </h2>
+        <div class="absolute inset-0 bg-black/20"></div>
 
-        <p class="text-white text-lg md:text-2xl mt-2 text-center">
-            ${evento.fecha}
-        </p>
+    `;
 
-    </div>
-`;
+    document.querySelectorAll(".dot").forEach((dot, i) => {
 
-            document.querySelectorAll(".dot").forEach((dot, i) => {
-                dot.classList.toggle("bg-white", i === indice);
-                dot.classList.toggle("bg-white/50", i !== indice);
-            });
+        dot.classList.remove("bg-white");
+        dot.classList.add("bg-white/40");
+
+        if (i === indice) {
+
+            dot.classList.remove("bg-white/40");
+            dot.classList.add("bg-white");
+
         }
 
+    });
+
+} 
         // Touch swipe
         banner.addEventListener("touchstart", e => startX = e.touches[0].clientX);
         banner.addEventListener("touchend", e => {
@@ -106,8 +99,38 @@ async function cargarBanner() {
 
         // Dots
         indicadores.innerHTML = eventos.map((_, i) => `
-            <button class="dot w-3 h-3 rounded-full bg-white/50 transition" data-index="${i}"></button>
-        `).join("");
+    <button
+        class="dot w-4 h-4 rounded-full bg-white/40 border border-white"
+        data-index="${i}">
+    </button>
+`).join("");
+document
+.getElementById("prevBanner")
+.addEventListener("click", () => {
+
+    indice--;
+
+    if (indice < 0) {
+        indice = eventos.length - 1;
+    }
+
+    mostrarEvento();
+
+});
+
+document
+.getElementById("nextBanner")
+.addEventListener("click", () => {
+
+    indice++;
+
+    if (indice >= eventos.length) {
+        indice = 0;
+    }
+
+    mostrarEvento();
+
+});
 
         // Click en dots
         document.querySelectorAll(".dot").forEach(dot => {
