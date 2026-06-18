@@ -12,6 +12,12 @@ import {
     updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js";
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
+
 const firebaseConfig = {
 
     apiKey: "AIzaSyDMVoHXT7zzK0R-mgr5y0JC_JBo-hJ5uNQ",
@@ -26,6 +32,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+        window.location.href = "login.html";
+        return;
+
+    }
+
+    document
+        .getElementById("bodyAdmin")
+        .classList.remove("hidden");
+
+});
 let editandoId = null;
 let bannerPcActual = "";
 let bannerMovilActual = "";
@@ -603,3 +625,13 @@ function limpiarFormulario() {
         "guardarEvento"
     ).innerText = "Guardar";
 }
+document
+.getElementById("logoutBtn")
+.addEventListener("click", async () => {
+
+    await signOut(auth);
+
+    window.location.href =
+        "login.html";
+
+});

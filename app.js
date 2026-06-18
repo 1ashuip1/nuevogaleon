@@ -525,3 +525,19 @@ window.addEventListener("scroll", () => {
     }
 
 });
+let clicksAdmin = 0;
+
+document
+.getElementById("adminAccess")
+.addEventListener("click", () => {
+
+    clicksAdmin++;
+
+    if (clicksAdmin >= 5) {
+
+        window.location.href =
+            "/admin/login.html";
+
+    }
+
+});
