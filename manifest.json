@@ -1,0 +1,22 @@
+{
+  "name": "Gran Galeón",
+  "short_name": "Gran Galeón",
+  "description": "Discoteca Gran Galeón",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#8b00ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/logonav.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/logonav2.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

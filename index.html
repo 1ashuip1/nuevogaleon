@@ -4,11 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prueba Firebase</title>
-
+<title>El Nuevo Galeon</title>
+<meta name="theme-color" content="#8b00ff">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+<link rel="manifest" href="manifest.json">
 </head>
 
 <body>
@@ -26,9 +26,10 @@
 
 </div>
 <div
-    id="topBar"
-    class="hidden md:flex bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500 text-white h-7 text-xs items-center justify-between px-4 transition-all duration-300">
-
+id="topBar"
+class="hidden md:flex fixed top-0 left-0 w-full h-7 z-50
+bg-gradient-to-r from-fuchsia-600 via-purple-600 to-cyan-500
+text-white text-xs items-center justify-between px-4 transition-all duration-500">
     <div class="flex items-center gap-4">
 
         <span class="flex items-center gap-1">
@@ -44,21 +45,21 @@
     </div>
 
     <div class="flex items-center gap-3 text-sm">
+<a href="https://www.facebook.com/elnuevogaleon/"><i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer"></i></a>
 
-        <i class="fa-brands fa-facebook cursor-pointer hover:scale-110 transition"></i>
+                    <a href="https://www.instagram.com/explore/locations/114839704169974/pena-show-el-nuevo-galeon/"><i class="fa-brands fa-instagram hover:text-pink-500 cursor-pointer"></i></a>
 
-        <i class="fa-brands fa-tiktok cursor-pointer hover:scale-110 transition"></i>
-
-        <i class="fa-brands fa-instagram cursor-pointer hover:scale-110 transition"></i>
+                    <a href="https://www.tiktok.com/@nuevogaleon_showbolivia"><i class="fa-brands fa-tiktok hover:text-white cursor-pointer"></i></a>
 
     </div>
 
 </div>
     <!-- Aquí va toda tu página -->
     <nav
-    id="navbar"
-    class="bg-black/20 backdrop-blur-sm border-b border-white/10 text-white fixed md:top-10 top-0 w-full z-40 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4">
+id="navbar"
+style="top:28px"
+class="fixed left-0 w-full z-40 transition-all duration-500 bg-black/20 text-white backdrop-blur-sm">
+<div class="max-w-7xl mx-auto px-4">
 
         <div
             id="navbarContent"
@@ -71,14 +72,14 @@
                 class="w-20 h-16 md:w-32 md:h-24 transition-all duration-300">
 
             <!-- Menú PC -->
-            <div class="hidden md:flex space-x-8 text-lg">
+            <div class="hidden md:flex space-x-8 text-xl">
 
-                <a href="#inicio">Inicio</a>
-                <a href="#cartelera">Cartelera</a>
-                <a href="#transmisiones">Transmisiones</a>
-                <a href="#galeria">Galería</a>
-                <a href="#nosotros">Nosotros</a>
-                <a href="#contacto">Contacto</a>
+                <a href="#inicio" class="navLink relative">Inicio</a>
+                <a href="#cartelera" class="navLink relative">Cartelera</a>
+                <a href="#transmisiones" class="navLink relative">Transmisiones</a>
+                <a href="#galeria" class="navLink relative">Galería</a>
+                <a href="#nosotros" class="navLink relative">Nosotros</a>
+                <a href="#contacto" class="navLink relative">Contacto</a>
 
             </div>
 
@@ -98,9 +99,8 @@
     <!-- Menú móvil -->
 
     <div
-    id="mobileMenu"
-    class="hidden md:hidden absolute right-4 top-full w-64 bg-black rounded-xl shadow-2xl overflow-hidden">
-
+id="mobileMenu"
+class="hidden md:hidden fixed top-16 right-4 w-64 bg-black/90 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden">
     <a href="#inicio" class="movil block p-4 border-b border-gray-700">
         Inicio
     </a>
@@ -134,23 +134,29 @@
         class="relative w-full h-full md:h-full overflow-hidden">
     </div>
 
-    <!-- Flecha izquierda -->
-    <button
-        id="prevBanner"
-        class="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 text-white w-12 h-20 rounded-l-lg">
+    <!-- Izquierda -->
+<button
+    id="prevBanner"
+    class="absolute left-6 top-1/2 -translate-y-1/2 z-30
+           text-white text-6xl
+           hover:scale-125 hover:text-black
+           transition-all duration-300">
 
-        ❮
+    <i class="fa-solid fa-circle-chevron-left"></i>
 
-    </button>
+</button>
 
-    <!-- Flecha derecha -->
-    <button
-        id="nextBanner"
-        class="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-black/70 text-white w-12 h-20 rounded-r-lg">
+<!-- Derecha -->
+<button
+    id="nextBanner"
+    class="absolute right-6 top-1/2 -translate-y-1/2 z-30
+           text-white text-6xl
+           hover:scale-125 hover:text-black
+           transition-all duration-300">
 
-        ❯
+    <i class="fa-solid fa-circle-chevron-right"></i>
 
-    </button>
+</button>
 
     <div
         id="indicadores"
@@ -185,37 +191,29 @@
 
 </section>
 
-<section id="transmisiones" class="min-h-screen py-10 bg-gray-100">
+<section id="transmisiones" class="min-h-screen py-12 bg-black">
 
-    <h2 class="text-4xl font-bold text-center mb-8">
+    <h2 class="text-5xl font-bold text-center text-white mb-10">
         Transmisiones
     </h2>
 
     <div class="max-w-7xl mx-auto px-4">
 
-        <div class="grid lg:grid-cols-3 gap-6">
+        <div class="grid lg:grid-cols-3 gap-8">
 
-            <!-- Pantalla principal -->
+            <!-- Banner -->
             <div class="lg:col-span-2">
 
-                <div class="bg-white rounded-2xl shadow-xl p-4">
-
-                    <div class="fb-page"
-                        data-href="https://www.facebook.com/elnuevogaleon"
-                        data-tabs="timeline"
-                        data-width="500"
-                        data-height="700"
-                        data-adapt-container-width="true">
-                    </div>
-
-                    </div>
+                <img
+                    src="assets/transmisiones.png"
+                    class="w-full h-[80vh] object-cover rounded-2xl shadow-2xl">
 
             </div>
 
-            <!-- Videos laterales -->
+            <!-- Videos -->
             <div
                 id="videosContainer"
-                class="space-y-4">
+                class="space-y-4 h-[80vh] overflow-y-auto pr-2">
 
             </div>
 
@@ -225,31 +223,34 @@
 
 </section>
 
-<section id="galeria" class="py-16 bg-gray-100">
+<section
+    id="galeria"
+    class="relative py-20">
 
-    <h2 class="text-4xl font-bold text-center mb-10">
-        Galería
-    </h2>
-
-    <div
-        id="galeriaContainer"
-        class="columns-2 md:columns-3 lg:columns-4 gap-4 px-4 max-w-7xl mx-auto">
-    </div>
-   <div
-    id="modal"
-    class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-
-    <button
-        id="cerrarModal"
-        class="absolute top-5 right-5 text-white text-4xl z-50">
-        ✕
-    </button>
-
+    <!-- Fondo -->
     <img
-        id="modalImg"
-        class="max-w-[95%] max-h-[90%] rounded-xl shadow-2xl">
+        src="assets/Fondo1.jpg"
+        class="absolute inset-0 w-full h-full object-cover">
 
-</div>
+    <div class="absolute inset-0 bg-black/80"></div>
+
+    <div class="relative z-10">
+
+        <h2 class="text-5xl font-bold text-center text-white mb-4">
+            Nuestro Staff
+        </h2>
+
+        <p class="text-center text-gray-300 mb-12">
+            DJ's • Animadores • Personal
+        </p>
+
+        <div
+            id="galeriaContainer"
+            class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 px-6">
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -295,7 +296,7 @@
 
                 <img
                     id="imagenNosotros"
-                    src="assets/disco1.jpg"
+                    src="assets/Fondo1.jpg"
                     class="w-full h-[450px] object-cover rounded-2xl shadow-2xl">
 
             </div>
@@ -501,11 +502,11 @@
 
                 <div class="flex gap-4 text-2xl">
 
-                    <i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer"></i>
+                    <a href="https://www.facebook.com/elnuevogaleon/"><i class="fa-brands fa-facebook hover:text-blue-500 cursor-pointer"></i></a>
 
-                    <i class="fa-brands fa-instagram hover:text-pink-500 cursor-pointer"></i>
+                    <a href="https://www.instagram.com/explore/locations/114839704169974/pena-show-el-nuevo-galeon/"><i class="fa-brands fa-instagram hover:text-pink-500 cursor-pointer"></i></a>
 
-                    <i class="fa-brands fa-tiktok hover:text-white cursor-pointer"></i>
+                    <a href="https://www.tiktok.com/@nuevogaleon_showbolivia"><i class="fa-brands fa-tiktok hover:text-white cursor-pointer"></i></a>
 
                 </div>
 
@@ -532,7 +533,81 @@
 </footer>
 
 <script type="module" src="app.js"></script>
+<div id="modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <img
+        id="modalImg"
+        class="max-w-[90%] max-h-[90%] rounded-xl">
+</div>
+<div
+id="radioPlayer"
+class="hidden md:block fixed bottom-5 right-5 z-[9999]">
 
+    <div
+        id="radioCard"
+        class="flex items-center gap-4
+               bg-black/80 backdrop-blur-xl
+               border border-fuchsia-500/40
+               rounded-full
+               px-5 py-3
+               shadow-2xl
+               overflow-hidden
+               w-16
+               transition-all duration-500">
+
+        <button
+            id="toggleRadio"
+            class="text-3xl text-cyan-400">
+
+            <i class="fa-solid fa-radio"></i>
+
+        </button>
+
+        <div
+            id="radioInfo"
+            class="opacity-0 w-0 overflow-hidden transition-all duration-500">
+
+            <p class="text-white font-bold">
+                Gran Galeón
+            </p>
+
+            <p class="text-green-400 text-xs">
+                ● EN VIVO
+            </p>
+
+            <audio 
+id="radioAudio"
+controls
+class="mt-2 w-52">
+    <source
+        src="https://stream.consultoradas.com/8354/stream"
+        type="audio/mpeg">
+</audio>
+
+        </div>
+
+    </div>
+
+</div>
+<div
+id="radioMobile"
+class="md:hidden fixed bottom-6 right-6 z-[9999]">
+
+    <button
+        id="playRadioMobile"
+        class="w-16 h-16 rounded-full
+               bg-gradient-to-r from-fuchsia-600 to-cyan-500
+               shadow-2xl
+               text-white
+               text-2xl
+               flex items-center justify-center
+               hover:scale-110
+               transition-all">
+
+        <i id="iconRadio" class="fa-solid fa-play"></i>
+
+    </button>
+
+</div>
 </body>
 
 </html>

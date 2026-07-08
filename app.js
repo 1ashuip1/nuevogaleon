@@ -32,7 +32,48 @@ let startX = 0;
 let endX = 0;
 let indice = 0;           // ← movido aquí
 let eventos = [];         // ← movido aquí
+const secciones = document.querySelectorAll("section[id]");
+const links = document.querySelectorAll(".navLink, .movil");
+window.addEventListener("scroll",()=>{
 
+    let actual="";
+
+    secciones.forEach(sec=>{
+
+        const top=sec.offsetTop-130;
+        const alto=sec.offsetHeight;
+
+        if(scrollY>=top && scrollY<top+alto){
+
+            actual=sec.id;
+
+        }
+
+    });
+
+    links.forEach(link=>{
+
+        link.classList.remove(
+            "text-cyan-400",
+            "border-b-2",
+            "border-cyan-400",
+            "pb-1"
+        );
+
+        if(link.getAttribute("href")==="#"+actual){
+
+            link.classList.add(
+                "text-cyan-400",
+                "border-b-2",
+                "border-cyan-400",
+                "pb-1"
+            );
+
+        }
+
+    });
+
+});
 // ==================== FUNCIONES ====================
 
 // Ocultar loader cuando todo termine
@@ -83,10 +124,59 @@ async function cargarBanner() {
         const indicadores = document.getElementById("indicadores");
 
         const snapshot = await getDocs(collection(db, "eventos"));
-        eventos = [];
-        snapshot.forEach((doc) => eventos.push(doc.data()));
 
-        if (eventos.length === 0) return;
+const hoy = new Date();
+hoy.setHours(0,0,0,0);
+
+// Lunes
+const inicioSemana = new Date(hoy);
+inicioSemana.setDate(hoy.getDate() - hoy.getDay() + 1);
+inicioSemana.setHours(0,0,0,0);
+
+// Domingo
+const finSemana = new Date(inicioSemana);
+finSemana.setDate(inicioSemana.getDate() + 6);
+finSemana.setHours(23,59,59,999);
+
+eventos = [];
+
+snapshot.forEach((docSnap) => {
+
+    const evento = docSnap.data();
+
+    const fechaEvento = new Date(evento.fecha + "T00:00:00");
+
+    if (
+        fechaEvento >= inicioSemana &&
+        fechaEvento <= finSemana
+    ) {
+
+        eventos.push(evento);
+
+    }
+
+});
+
+        if (eventos.length === 0) {
+
+    banner.innerHTML = `
+        <div class="w-full h-full flex items-center justify-center bg-black text-white">
+            <div class="text-center">
+                <h2 class="text-4xl font-bold">
+                    No hay eventos esta semana
+                </h2>
+
+                <p class="mt-4 text-gray-300">
+                    Vuelve pronto para conocer nuestra próxima cartelera.
+                </p>
+            </div>
+        </div>
+    `;
+
+    indicadores.innerHTML = "";
+
+    return;
+}
 
         function mostrarEvento() {
 
@@ -264,31 +354,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     await Promise.all([
         cargarVideos(),
         cargarBanner(),
-        cargarCartelera()
+        cargarCartelera(),
+        cargarGaleria()
     ]);
 
     ocultarLoader();
 
-    // Menú móvil
-    const menuBtn = document.getElementById("menuBtn");
-    const mobileMenu = document.getElementById("mobileMenu");
+   // Menú móvil
+const menuBtn = document.getElementById("menuBtn");
+const mobileMenu = document.getElementById("mobileMenu");
 
-    menuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-        menuBtn.innerHTML = mobileMenu.classList.contains("hidden") ? "☰" : "✕";
+menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+    menuBtn.innerHTML = mobileMenu.classList.contains("hidden") ? "☰" : "✕";
+});
+
+document.querySelectorAll(".movil").forEach(link => {
+    link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuBtn.innerHTML = "☰";
     });
+});
 
-    document.querySelectorAll(".movil").forEach(link => {
-        link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-    });
+ });
+ function convertirVideoFacebook(url) {
 
- });   
+    if (!url.includes("facebook.com")) {
+        return url;
+    }
+
+    return `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}&show_text=false&width=560`;
+
+}
+
 async function cargarVideos() {
 
     const contenedor =
-        document.getElementById(
-            "videosContainer"
-        );
+        document.getElementById("videosContainer");
 
     const snapshot =
         await getDocs(
@@ -299,17 +401,19 @@ async function cargarVideos() {
 
     snapshot.forEach(doc => {
 
-        const video =
-            doc.data();
+        const video = doc.data();
+
+        const urlVideo =
+            convertirVideoFacebook(video.url);
 
         contenedor.innerHTML += `
-        
-        <div
-            class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
 
             <iframe
-                src="${video.url}"
+                src="${urlVideo}"
                 class="w-full h-48"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                 allowfullscreen>
             </iframe>
 
@@ -322,71 +426,86 @@ async function cargarVideos() {
             </div>
 
         </div>
+
         `;
+
     });
 
 }
 async function cargarGaleria() {
 
     const contenedor =
-        document.getElementById(
-            "galeriaContainer"
-        );
+        document.getElementById("galeriaContainer");
+
+    contenedor.innerHTML = "";
 
     const snapshot =
         await getDocs(
             collection(db, "galeria")
         );
 
-    contenedor.innerHTML = "";
-
     snapshot.forEach(doc => {
 
-        const foto =
-            doc.data();
+        const foto = doc.data();
 
         contenedor.innerHTML += `
-        
-        <div class="mb-4 break-inside-avoid">
 
-            <img
-                src="${foto.imagen}"
-                alt="${foto.titulo}"
-                class="w-full rounded-xl shadow-lg hover:scale-105 transition duration-300 cursor-pointer">
+<div
+class="group rounded-2xl overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 shadow-xl hover:scale-105 duration-300">
 
-        </div>
-        `;
+    <img
+        src="${foto.imagen}"
+        class="w-full h-80 object-cover group-hover:scale-110 duration-500">
+
+    <div class="p-5 text-center">
+
+        <h3 class="text-2xl font-bold text-white">
+
+            ${foto.titulo}
+
+        </h3>
+
+        <p class="text-purple-300">
+
+            ${foto.cargo || ""}
+
+        </p>
+
+    </div>
+
+</div>
+
+`;
+
     });
 
 }
-await cargarGaleria();
-document.addEventListener("click", e => {
 
-    if (e.target.tagName === "IMG") {
+document
+.getElementById("galeriaContainer")
+.addEventListener("click", e => {
 
-        document
-            .getElementById("modal")
-            .classList.remove("hidden");
+    if (e.target.tagName !== "IMG") return;
 
-        document
-            .getElementById("modalImg")
-            .src = e.target.src;
+    document
+        .getElementById("modal")
+        .classList.remove("hidden");
 
-    }
-
-});
-const modal =
-    document.getElementById("modal");
-
-modal.addEventListener("click", (e) => {
-
-    if (e.target === modal) {
-
-        modal.classList.add("hidden");
-
-    }
+    document
+        .getElementById("modalImg")
+        .src = e.target.src;
 
 });
+
+const modal = document.getElementById("modal");
+
+if (modal) {
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+}
 const imagenesNosotros = [
     "assets/Logo.jpg",
     "assets/logonav.png",
@@ -466,63 +585,45 @@ const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
 
-    // SOLO EN PC
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth < 768) {
+        
+    navbar.style.top = "0px";
+        return;
+}
+    if (window.scrollY > 20) {
 
-        if (window.scrollY > 20) {
+    topBar.style.transform = "translateY(-100%)";
+    topBar.style.opacity = "0";
 
-            // Ocultar barra superior
-            topBar.style.transform = "translateY(-100%)";
+    navbar.style.top = "0px";
 
-            // Subir navbar
-            navbar.style.top = "0";
+    navbar.classList.remove(
+        "bg-black/20",
+        "backdrop-blur-sm"
+    );
 
-            // Fondo sólido
-            navbar.classList.remove(
-                "bg-black/20",
-                "backdrop-blur-sm"
-            );
+    navbar.classList.add(
+        "bg-black"
+    );
 
-            navbar.classList.add(
-                "bg-black"
-            );
+} else {
 
-        } else {
+    topBar.style.transform = "translateY(0)";
+    topBar.style.opacity = "1";
 
-            // Mostrar barra superior
-            topBar.style.transform = "translateY(0)";
+    navbar.style.top = "28px";
 
-            // Dejar espacio para topBar
-            navbar.style.top = "28px";
+    navbar.classList.remove(
+        "bg-black"
+    );
 
-            // Transparente con blur
-            navbar.classList.remove(
-                "bg-black"
-            );
+    navbar.classList.add(
+        "bg-black/20",
+        "backdrop-blur-sm"
+    );
 
-            navbar.classList.add(
-                "bg-black/20",
-                "backdrop-blur-sm"
-            );
+}
 
-        }
-
-    } else {
-
-        // MÓVIL
-        topBar.style.transform = "translateY(0)";
-        navbar.style.top = "0";
-
-        navbar.classList.remove(
-            "bg-black/20",
-            "backdrop-blur-sm"
-        );
-
-        navbar.classList.add(
-            "bg-black"
-        );
-
-    }
 
 });
 let clicksAdmin = 0;
@@ -541,3 +642,134 @@ document
     }
 
 });
+function abrirModal(src){
+
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+
+    if(!modal || !modalImg) return;
+
+    modal.classList.remove("hidden");
+    modalImg.src = src;
+
+}
+
+document
+.getElementById("carteleraContainer")
+.addEventListener("click", e => {
+
+    if (e.target.tagName !== "IMG") return;
+
+    document
+        .getElementById("modal")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("modalImg")
+        .src = e.target.src;
+
+});
+const card =
+document.getElementById("radioCard");
+
+const info =
+document.getElementById("radioInfo");
+
+const audio =
+document.getElementById("radioAudio");
+
+let abierto=false;
+
+document
+.getElementById("toggleRadio")
+.addEventListener("click",()=>{
+
+    abierto=!abierto;
+
+    if(abierto){
+
+        card.classList.remove("w-16");
+        card.classList.add("w-80");
+
+        info.classList.remove(
+            "opacity-0",
+            "w-0"
+        );
+
+        info.classList.add(
+            "opacity-100",
+            "w-full"
+        );
+
+        audio.play();
+
+    }else{
+
+        card.classList.remove("w-80");
+        card.classList.add("w-16");
+
+        info.classList.remove(
+            "opacity-100",
+            "w-full"
+        );
+
+        info.classList.add(
+            "opacity-0",
+            "w-0"
+        );
+
+        audio.pause();
+
+    }
+
+});
+const btn =
+document.getElementById("playRadioMobile");
+
+const icon =
+document.getElementById("iconRadio");
+
+audio.volume = 0.3; // volumen al 30%
+
+btn.addEventListener("click",()=>{
+
+    if(audio.paused){
+
+        audio.play();
+
+        icon.classList.remove("fa-play");
+        icon.classList.add("fa-pause");
+
+        btn.classList.add(
+            "animate-pulse",
+            "ring-4",
+            "ring-fuchsia-500/50"
+        );
+
+    }else{
+
+        audio.pause();
+
+        icon.classList.remove("fa-pause");
+        icon.classList.add("fa-play");
+
+        btn.classList.remove(
+            "animate-pulse",
+            "ring-4",
+            "ring-fuchsia-500/50"
+        );
+
+    }
+
+});
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker.register("sw.js")
+            .then(() => console.log("SW registrado"))
+            .catch(err => console.log(err));
+
+    });
+
+}
