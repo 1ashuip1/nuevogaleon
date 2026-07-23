@@ -538,21 +538,29 @@ class="hidden md:hidden fixed top-16 right-4 w-64 bg-black/90 backdrop-blur-lg r
         id="modalImg"
         class="max-w-[90%] max-h-[90%] rounded-xl">
 </div>
-<!-- Botón flotante de WhatsApp -->
-<a
-    href="https://wa.me/59164190648?text=Hola,%20quiero%20más%20información%20sobre%20Gran%20Galeón"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="fixed bottom-6 right-6 z-[9999] flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-105">
+<!-- WhatsApp flotante -->
+<div class="fixed bottom-6 right-6 z-[9999] flex flex-col items-center">
 
-    <i class="fa-brands fa-whatsapp text-3xl"></i>
-
-    <div class="hidden md:block">
-        <p class="font-bold leading-none">Información</p>
-        <p class="text-xs opacity-90">Escríbenos por WhatsApp</p>
+    <!-- Etiqueta -->
+    <div class="mb-2 px-4 py-2 rounded-full
+                bg-green-500 text-white text-sm font-bold
+                shadow-2xl animate-bounce">
+        💬 Informes y Reservas
     </div>
 
-</a>
+    <!-- Botón -->
+    <a href="https://wa.me/59171234567?text=Hola,%20quiero%20información%20sobre%20Gran%20Galeón"
+       target="_blank"
+       class="w-16 h-16 rounded-full bg-green-500
+              flex items-center justify-center
+              shadow-[0_0_25px_rgba(34,197,94,0.8)]
+              hover:scale-110 transition-all duration-300">
+
+        <i class="fa-brands fa-whatsapp text-white text-4xl"></i>
+
+    </a>
+
+</div>
 </body>
 
 </html>
