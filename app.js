@@ -295,14 +295,14 @@ async function cargarCartelera() {
         inicioSemana.setHours(0, 0, 0, 0);
 
         const finSemana = new Date(inicioSemana);
-        finSemana.setDate(inicioSemana.getDate() + 6);
-
+finSemana.setDate(inicioSemana.getDate() + 6);
+finSemana.setHours(23,59,59,999);
         let html = "";
 
         snapshot.forEach(doc => {
             const evento = doc.data();
-            const fechaEvento = new Date(evento.fecha);
-
+             const fechaEvento = new Date(evento.fecha + "T00:00:00");
+             fechaEvento.setHours(0,0,0,0);
             if (fechaEvento >= inicioSemana && fechaEvento <= finSemana) {
                 html += `
 <div class="backdrop-blur-md bg-black/60 border border-purple-500/30
